@@ -224,8 +224,6 @@ var baseDatos = {
     successSolicitudesPorEnviar: function(tx, results){
     	var len = results.rows.length;
         var sobrante,largoCadena, valorDeReferencia;
-
-        //ulLista = document.getElementById('listadoSolicitudesPorEnviar'); 
         var $ulLista = $('#listadoSolicitudesPorEnviar');
         $ulLista.find('li').remove('li');
         console.log("Tabla SolicitiudesPorEnviar: " + len + " filas encontradas.");
@@ -234,35 +232,12 @@ var baseDatos = {
 		    	var r = results.rows.item(i);
 		    	window.montoUtilizado =window.montoUtilizado+(r.valor_referencia*r.cantidad);
                 window.montoUtilizado = app.formatValores(window.montoUtilizado);
-		        // largoCadena = r.valor_referencia.toString().length;
-          //       if(largoCadena > 3){
-          //           sobrante = largoCadena-3;
-          //           valorDeReferencia = r.valor_referencia.toString().substring(0,sobrante)+'.'+r.valor_referencia.toString().substring(largoCadena-3,largoCadena);
-          //       }else{
-          //           valorDeReferencia = r.valor_referencia.toString();
-          //       }
-                valorDeReferencia = app.formatValores(r.valor_referencia);
-		        //sobrante = largoCadena-3;
-		        //valorDeReferencia = r.valor_referencia.toString().substring(0,sobrante)+'.'+r.valor_referencia.toString().substring(largoCadena-3,largoCadena);
+                valorDeReferencia = app.formatValores(r.valor_referencia);		        
+                var $elemento = $('<li></li>');
+                var chk = '<a href="#" style="padding-top: 0px;padding-bottom: 0px;padding-right: 42px;padding-left: 0px;"><label style="border-top-width: 0px;margin-top: 0px;border-bottom-width: 0px;margin-bottom: 0px;border-left-width: 0px;border-right-width: 0px;" data-corners="false"><fieldset data-role="controlgroup" ><label style="border-top-width: 0px;margin-top: 0px;border-bottom-width: 0px;margin-bottom: 0px;border-left-width: 0px;border-right-width: 0px;"><label><p class="label-sol">'+r.nombre_libro+'</p><p class="label-precio">Precio: $'+valorDeReferencia+'</p><p class="label-cantidad">Cantidad: '+r.cantidad +'</p></label></label></fieldset></label></a><a href="#" onClick="app.irEditarLibro('+r.id+')" ></a>';
+                $elemento.html(chk);
 
-                //if($('#checkbox-'+r.isbn).length < 1){
-                    var $elemento = $('<li></li>');
-                    //var chk = '<input type="checkbox" name="checkbox-'+r.isbn+'" id="checkbox-'+r.isbn+'" class="custom"/> <label for="checkbox-'+r.isbn+'"><p class="label-sol">'+r.nombre_libro+'</p><p class="label-precio">Precio: $'+valorDeReferencia+'</p><p class="label-cantidad">Cantidad: '+r.cantidad +'</p></label>';
-                    // var chk = '<a href="#"><input type="checkbox" name="checkbox-'+r.isbn+'" id="checkbox-'+r.isbn+'" class="custom"/><label for="checkbox-'+r.isbn+'"><p class="label-sol">'+r.nombre_libro+'</p><p class="label-precio">Precio: $'+valorDeReferencia+'</p><p class="label-cantidad">Cantidad: '+r.cantidad +'</p></label></a><a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>';
-                    //var chk = '<a href="#"><input type="checkbox" name="checkbox-'+r.isbn+'" id="checkbox-'+r.isbn+'" class="custom"/><p class="label-sol">'+r.nombre_libro+'</p><p class="label-precio">Precio: $'+valorDeReferencia+'</p><p class="label-cantidad">Cantidad: '+r.cantidad +'</p></a><a href="#purchase" data-position-to="window" data-transition="fade">Editar</a>';
-                    var chk = '<a href="#" style="padding-top: 0px;padding-bottom: 0px;padding-right: 42px;padding-left: 0px;"><label style="border-top-width: 0px;margin-top: 0px;border-bottom-width: 0px;margin-bottom: 0px;border-left-width: 0px;border-right-width: 0px;" data-corners="false"><fieldset data-role="controlgroup" ><label style="border-top-width: 0px;margin-top: 0px;border-bottom-width: 0px;margin-bottom: 0px;border-left-width: 0px;border-right-width: 0px;"><label><p class="label-sol">'+r.nombre_libro+'</p><p class="label-precio">Precio: $'+valorDeReferencia+'</p><p class="label-cantidad">Cantidad: '+r.cantidad +'</p></label></label></fieldset></label></a><a href="#" onClick="app.irEditarLibro('+r.id+')" ></a>';
-                    //var chk = '<p class="lblNombreLibro">'+libro.Titulo+'</p><p class="lblAutor">Autor: '+libro.Autor+'</p><p class="lblPrecio">Precio: $'+app.formatValores(libro.Precio)+'</p><p class="lblCantidad">Cantidad: '+libro.Cantidad+'</p>';
-                    // var chk = '<a href="#" style="padding-top: 0px;padding-bottom: 0px;padding-right: 42px;padding-left: 0px;"><label style="border-top-width: 0px;margin-top: 0px;border-bottom-width: 0px;margin-bottom: 0px;border-left-width: 0px;border-right-width: 0px;" data-corners="false"><fieldset data-role="controlgroup" ><input type="checkbox" name="checkbox-'+r.isbn+'" id="checkbox-'+r.isbn+'" class="custom"/><label for="checkbox-'+r.isbn+'" style="border-top-width: 0px;margin-top: 0px;border-bottom-width: 0px;margin-bottom: 0px;border-left-width: 0px;border-right-width: 0px;"><label><p class="label-sol">'+r.nombre_libro+'</p><p class="label-precio">Precio: $'+valorDeReferencia+'</p><p class="label-cantidad">Cantidad: '+r.cantidad +'</p></label></label></fieldset></label></a><a href="#" onClick="app.irEditarLibro('+r.id+')" ></a>';
-                    $elemento.html(chk);
-
-                    // <a href="#" style="padding-top: 0px;padding-bottom: 0px;padding-right: 42px;padding-left: 0px;"><label style="border-top-width: 0px;margin-top: 0px;border-bottom-width: 0px;margin-bottom: 0px;border-left-width: 0px;border-right-width: 0px;" data-corners="false"><fieldset data-role="controlgroup" ><input type="checkbox" name="checkbox-'+r.isbn+'" id="checkbox-'+r.isbn+'" class="custom"/><label for="checkbox-'+r.isbn+'" style="border-top-width: 0px;margin-top: 0px;border-bottom-width: 0px;margin-bottom: 0px;border-left-width: 0px;border-right-width: 0px;"><label style="padding:10px 0px 0px 10px;"><p class="label-sol">'+r.nombre_libro+'</p><p class="label-precio">Precio: $'+valorDeReferencia+'</p><p class="label-cantidad">Cantidad: '+r.cantidad +'</p></label></label></fieldset></label></a><a href="http://appcropolis.com/blog/advanced-customization-jquery-mobile-buttons/" rel="external"></a>
-
-                    // var chk = '<input type="checkbox" name="checkbox-'+r.isbn+'" id="checkbox-'+r.isbn+'" class="custom"/> <label for="checkbox-'+r.isbn+'"><p class="label-sol"><img src="style/img/icons/solEnviadas.png" style="float:left;">'+r.nombre_libro+'<br/>Precio: $'+valorDeReferencia+'<br>Cantidad: '+r.cantidad +'<br /></p></label>';
-                    //ulLista.appendChild($elemento[0]);
-                    $ulLista.append($elemento).trigger('create');
-                // }else{
-                //     $('#checkbox-'+r.isbn).attr("checked",false).checkboxradio("refresh");
-                // }
+                $ulLista.append($elemento).trigger('create');
 		    }
             if ($ulLista.hasClass('ui-listview')) {
                 $ulLista.listview('refresh');
@@ -274,7 +249,8 @@ var baseDatos = {
 		}else{
 			//document.getElementById("sinResultadoSolicitud").innerHTML = 'Usted no tiene solicitudes por enviar.';			
 			console.log('no tiene solicitudes por enviar');
-            alert('No tienes Solicitudes por enviar');
+            $.mobile.changePage( '#inicio', { transition: "slide"} );            
+            alert('No tienes Libros por enviar');
 		}
     },
 

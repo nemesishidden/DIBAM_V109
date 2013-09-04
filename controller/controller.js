@@ -249,6 +249,7 @@ var app = {
         window.db.transaction(function(tx) {
             baseDatos.obtenerLibroId(tx, idLibro);
         }, baseDatos.errorTablaSolicitudes, function(tx){
+            app.actualizaTotal($('#cantidadE').val(), 'precioReferenciaE', 'totalPresupuestoE');
             $.mobile.changePage('#editarSolicitudPag',{transition: "slide"});
         } );
 
