@@ -215,9 +215,9 @@ var app = {
 
     actualizaTotal: function(cantidad, idElemento, idTotal){
         var valor = $('#'+idElemento).val();
-        var total = parseInt(valor)*parseInt(cantidad.value);
+        var total = parseInt(valor)*parseInt(cantidad);
         total = app.formatValores(total);
-        $('#'+idTotal).text(total);
+        $('#'+idTotal).text(total!= 'NaN'?total:0);
     },
 
     irEvento: function(eId){
@@ -325,9 +325,11 @@ var app = {
                 if(isbn.toString().length != 0){
                     if(data.success){
                         var a = data.model;
+                        app.actualizaTotal(0, 'precioReferencia', 'totalPresupuesto');
                         document.getElementById("isbn").value = a.isbn;
                         document.getElementById("titulo").value = a.titulo;
                         document.getElementById("autor").value = a.autor;
+
                     }else{
                         $.mobile.hidePageLoadingMsg();
                         alert(data.model.error+'\nPor favor ingreselo manualmente.');
