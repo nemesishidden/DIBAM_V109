@@ -651,6 +651,7 @@ var app = {
                 }
             });
         }else{
+            $.mobile.hidePageLoadingMsg();
             $('#popupDialog').find('h1').text('Advertencia');
             $('#popupDialog').find('h3').text('Debe llenar el campo para poder enviar.');
             $('#popupDialog').popup().popup('open');
