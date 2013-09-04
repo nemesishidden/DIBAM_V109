@@ -450,40 +450,34 @@ var app = {
     },
 
     enviarSolicitud: function(){
-        var largoArray = $('#listadoSolicitudesPorEnviar').find('li').find('input:checked').length;
-        var libros = new Array(largoArray);
-        var i = 0;
-        $('#listadoSolicitudesPorEnviar').find('li').find('input:checked').each(function(e, b){
-            var libro = {
-                codigoISBN: b.id.split('-')[1],
-                Titulo: '',
-                Autor: '',
-                Cantidad: '',
-                Precio: ''
-            };
-            libros[i] = libro;
-            i++;
-        });
-        window.db.transaction(function(tx){
-           baseDatos.obtenerLibroSolicitudesPorEnviar(tx, libros, window.usuario);
-        }, baseDatos.errorBuscarLibroEnvio, function(){
-            window.encontrados.forEach(function(x){
-                libros.forEach(function(z){
-                    if(parseInt(z.codigoISBN) == x.isbn){
-                        console.log(z);
-                        z.Autor = x.autor;
-                        z.Titulo = x.nombre_libro;
-                        z.Cantidad = x.cantidad;
-                        z.Precio = x.valor_referencia;
-                    }
-                });
-            });
-            if(libros.length >= 1){
+        window.db.transaction(function(tx) {
+            tx.executeSql('select * from Solicitudes_por_enviar where idUsuario='+window.usuario.id+' and idPresupuesto='+window.usuario.evento.id, [], function(tx, results){
+
+                var len = results.rows.length;
+                var libros = new Array(len);
+                for (var i=0; i<len; i++){
+                    var r = results.rows.item(i);
+                    console.log(r);
+                    var libro = {
+                        codigoISBN: r.isbn,
+                        Titulo: r.nombre_libro,
+                        Autor: r.autor,
+                        Cantidad: r.cantidad,
+                        Precio: r.valor_referencia
+                    };
+                    libros[i] = libro;
+                }
                 app.enviarDibam(libros);
-            }else{
-                alert('Debe seleccionar al menos un libro para enviar');
-            }            
+
+            }, function(tx){
+                console.log("error");
+            });
+        }, function(tx){
+            //error
+        }, function(tx){
+            //exito
         });
+        
     },
 
     enviarDibam: function(sol){
