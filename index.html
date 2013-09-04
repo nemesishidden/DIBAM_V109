@@ -22,8 +22,8 @@
                     <label for="basic">Contraseña:</label><br />
                     <input type="password" name="argClave" id="pass" value="" placeholder="Contraseña"/>
                     <center><input type="button" value="INGRESAR" id="logear" data-inline="true"/>
-                        <!-- <a href="#popupBasic" data-rel="dialog">Open dialog1</a>
-                        <a href="#dialogoError" data-rel="dialog">Open dialog2</a> -->
+                        <!--<a href="#popupDialog" data-rel="popup">Open dialog1</a>-->
+                        
                     </center>
                 </form>
                 <center><img src="style/img/logo_dibam.jpg"></center>    
@@ -194,7 +194,7 @@
                 <h1>Libros enviados</h1>
             </div>
             <div data-role="content" style="padding: 0px;">   
-                <div class="divResumen" ></div>      
+                <!-- <div class="divResumen" ></div> -->      
                 <div>
                     <ol id="librosSolicitudesEnviadas" data-role="listview" read-only="true" data-inset="true" style="margin: 40px 15px 0px 15px;"></ol>
                 </div>
@@ -287,19 +287,22 @@
        <!--  <div data-role="dialog" id="dialogoError">
             <p id="mensajeError"><p>
         </div> -->
-        <div data-role="popup" data-theme="a" data-overlay-theme="a" class="ui-content" id="dialogoError">
-            
-        </div>
-        <div data-role="page" id="popupBasic">
-            <div data-role="header" ><p>Titulo</p></div>
-            <div data-role="content"><p>content</p></div>
-            <div data-role="footer" class="ui-bar-a-footer"><p>footer</p>
-        </div>
+        <!--<div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="max-width:400px;" class="ui-corner-all ui-popup ui-body-c ui-overlay-shadow" aria-disabled="false" data-disabled="false" data-shadow="true" data-corners="true" data-transition="none" data-position-to="origin">
+                    <div data-role="header" data-theme="a" class="ui-corner-top ui-header ui-bar-a" role="banner">
+                        <h1 class="ui-title" role="heading" aria-level="1">Delete Page?</h1>
+                    </div>
+                    <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content ui-body-d" role="main">
+                        <h3 class="ui-title">Are you sure you want to delete this page?</h3>
+                        <p>This action cannot be undone.</p>
+                        <a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-inline ui-btn-up-c"><span class="ui-btn-inner"><span class="ui-btn-text">Cancel</span></span></a>    
+                        <a href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow" data-theme="b" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-inline ui-btn-up-b"><span class="ui-btn-inner"><span class="ui-btn-text">Delete</span></span></a>  
+                    </div>
+                </div>-->
             <!-- <div data-role="popup" id="popupBasic">
                 <p>This is a completely basic popup, no options set.<p>
             </div> -->
 
-        <!-- <script src="lib/cordova.js"></script>  -->
+        <!-- <script src="lib/cordova.js"></script> -->
         <script src="cordova.js"></script> 
         <script src="barcodescanner.js"></script>
         <!--<script type="text/javascript" src="childbrowser.js"></script>-->
