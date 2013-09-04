@@ -70,7 +70,10 @@ var baseDatos = {
     			console.log('agregado');   			
     			baseDatos.agregarSolicitud(tx, libro, usuario.evento.id);
     		}else{
-    			alert('el libro ya se encuentra agregado');
+                $('#popupDialog').find('h1').text('Advertencia');
+                $('#popupDialog').find('h3').text('El libro ya se encuentra agregado');
+                $('#popupDialog').popup().popup('open');
+    			//alert('El libro ya se encuentra agregado');
     		}
     	}, baseDatos.errorGuardar);
     },
@@ -249,8 +252,11 @@ var baseDatos = {
 		}else{
 			//document.getElementById("sinResultadoSolicitud").innerHTML = 'Usted no tiene solicitudes por enviar.';			
 			console.log('no tiene solicitudes por enviar');
-            $.mobile.changePage( '#inicio', { transition: "slide"} );            
-            alert('No tienes Libros por enviar');
+            $.mobile.changePage( '#inicio', { transition: "slide"} );
+            $('#popupDialog').find('h1').text('Advertencia');
+            $('#popupDialog').find('h3').text('No tienes Libros por enviar');
+            $('#popupDialog').popup().popup('open');           
+            //alert('No tienes Libros por enviar');
 		}
     },
 
@@ -292,7 +298,10 @@ var baseDatos = {
     successGuardarLibro: function(){
     	console.log('Libro Creado Exitosamente');
         //app.construirResumen(idEvento);
-        alert('Libro guardado exitosamente.');
+        $('#popupDialog').find('h1').text('Advertencia');
+        $('#popupDialog').find('h3').text('Libro guardado exitosamente.');
+        $('#popupDialog').popup().popup('open');   
+        //alert('Libro guardado exitosamente.');
         $.mobile.changePage( '#inicio',{transition: "slide"});
     },
 
@@ -344,30 +353,45 @@ var baseDatos = {
     },
     // Función 'callback' de error de transacción
     errorCB: function(tx) {
-        alert("Error procesando SQL: "+tx.message);
+        $('#popupDialog').find('h1').text('Advertencia');
+        $('#popupDialog').find('h3').text('Error procesando SQL: '+tx.message);
+        $('#popupDialog').popup().popup('open');  
+        //alert("Error procesando SQL: "+tx.message);
         console.log("Error procesando SQL Codigo: "+tx.code);
         console.log("Error procesando SQL: "+tx.message);
     },
     errorObteniendoPresupuesto: function(tx) {
-        alert("Error procesando SQL: "+tx.message);
+        $('#popupDialog').find('h1').text('Advertencia');
+        $('#popupDialog').find('h3').text('Error procesando SQL: '+tx.message);
+        $('#popupDialog').popup().popup('open');  
+        //alert("Error procesando SQL: "+tx.message);
         console.log("Error procesando SQL Codigo: "+tx.code);
         console.log("Error procesando SQL: "+tx.message);
     },
 
     errorBorrarLibro: function(tx) {
-        alert("Error procesando SQL: "+tx.message);
+        $('#popupDialog').find('h1').text('Advertencia');
+        $('#popupDialog').find('h3').text('Error procesando SQL: '+tx.message);
+        $('#popupDialog').popup().popup('open');  
+        //alert("Error procesando SQL: "+tx.message);
         console.log("Error procesando SQL Codigo: "+tx.code);
         console.log("Error procesando SQL: "+tx.message);
     },
 
     errorObtenerLibroId: function(tx) {
-        alert("Error procesando SQL: "+tx.message);
+        $('#popupDialog').find('h1').text('Advertencia');
+        $('#popupDialog').find('h3').text('Error procesando SQL: '+tx.message);
+        $('#popupDialog').popup().popup('open');  
+        //alert("Error procesando SQL: "+tx.message);
         console.log("Error procesando SQL Codigo: "+tx.code);
         console.log("Error procesando SQL: "+tx.message);
     },
 
     errorUpdateLibro: function(tx){
-        alert("Error procesando SQL: "+tx.message);
+        $('#popupDialog').find('h1').text('Advertencia');
+        $('#popupDialog').find('h3').text('Error procesando SQL: '+tx.message);
+        $('#popupDialog').popup().popup('open');  
+        //alert("Error procesando SQL: "+tx.message);
         console.log("Error procesando SQL Codigo: "+tx.code);
         console.log("Error procesando SQL: "+tx.message); 
     }

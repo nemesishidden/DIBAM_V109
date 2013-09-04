@@ -58,14 +58,20 @@ var app = {
                     }                
                 }, 
                 function (error) {
-                    alert("Error al escanear el Libro: " + error);
+                    $('#popupDialog').find('h1').text('Advertencia');
+                    $('#popupDialog').find('h3').text('Error al escanear el Libro: ' + error);
+                    $('#popupDialog').popup().popup('open');
+                    //alert("Error al escanear el Libro: " + error);
                 }
             );
             // document.getElementById("precioReferencia").innerHTML = 0;
             // $('#formLibroNuevo')[0].reset();
             // app.buscarLibro(9789568410575);
         }else{
-            alert('Usted no tiene evento asociado.');
+            $('#popupDialog').find('h1').text('Advertencia');
+            $('#popupDialog').find('h3').text('Usted no tiene evento asociado.');
+            $('#popupDialog').popup().popup('open');
+            //alert('Usted no tiene evento asociado.');
         }
         
     },
@@ -73,7 +79,8 @@ var app = {
     logear: function(){
         console.log('logear');
         // $('#dialogoError').append('<p>prueba popup</p>');
-        // $('#dialogoError').popup().popup('open');
+        //$('#dialogPage').popup().popup('open');
+
         $('.divResumen').find('p').remove();
         $.mobile.showPageLoadingMsg( "c", "Cargando...", false );
         var form = $("#formLogin").serializeArray();
@@ -113,7 +120,11 @@ var app = {
 
                 }else{
                     $.mobile.hidePageLoadingMsg();
-                    alert('Usted no se encuentra registrado.');
+                    //$('#popupDialog').find('h3').remove('h3');
+                    $('#popupDialog').find('h1').text('Advertencia');
+                    $('#popupDialog').find('h3').text('Usted no se encuentra registrado.')
+                    $('#popupDialog').popup().popup('open');
+                    //alert('Usted no se encuentra registrado.');
                 }
             }
         });
@@ -159,7 +170,10 @@ var app = {
                 //$.mobile.changePage(pag,{transition: "slide"});
             });
         }else{
-            alert('Usted no tiene evento asociado.');
+            $('#popupDialog').find('h1').text('Advertencia');
+            $('#popupDialog').find('h3').text('Usted no tiene envento asociado.')
+            $('#popupDialog').popup().popup('open');
+            //alert('Usted no tiene evento asociado.');
         }
         
     },
@@ -205,7 +219,10 @@ var app = {
                     $.mobile.changePage(pag, {transition: "slide"});    
                 }else{
                     $.mobile.hidePageLoadingMsg();
-                    alert(data.model.error);
+                    $('#popupDialog').find('h1').text('Advertencia');
+                    $('#popupDialog').find('h3').text(data.model.error);
+                    $('#popupDialog').popup().popup('open');
+                    //alert(data.model.error);
                 }
             }
         });
@@ -333,7 +350,10 @@ var app = {
 
                     }else{
                         $.mobile.hidePageLoadingMsg();
-                        alert(data.model.error+'\nPor favor ingreselo manualmente.');
+                        $('#popupDialog').find('h1').text('Advertencia');
+                        $('#popupDialog').find('h3').text(data.model.error+'\nPor favor ingreselo manualmente.');
+                        $('#popupDialog').popup().popup('open');
+                        //alert(data.model.error+'\nPor favor ingreselo manualmente.');
                         document.getElementById("isbn").value = codigoIsbn;
                     }
                     $.mobile.changePage( '#newSolicitudPag', { transition: "slide"} );
@@ -347,15 +367,30 @@ var app = {
         console.log('guardarLibro idEvento: '+window.usuario.evento.id);
         var guardar = false;
         if(document.getElementById("isbn").value.trim().length <= 0){
-            alert('Debe completar el campo ISBN.');
+            $('#popupDialog').find('h1').text('Advertencia');
+            $('#popupDialog').find('h3').text('Debe completar el campo ISBN.');
+            $('#popupDialog').popup().popup('open');
+            //alert('Debe completar el campo ISBN.');
         }else if(document.getElementById("titulo").value.trim().length <= 0){
-            alert('Debe completar el campo Titulo.');
+            $('#popupDialog').find('h1').text('Advertencia');
+            $('#popupDialog').find('h3').text('Debe completar el campo Titulo.');
+            $('#popupDialog').popup().popup('open');
+            //alert('Debe completar el campo Titulo.');
         }else if(document.getElementById("autor").value.trim().length <= 0){
-            alert('Debe completar el campo Autor.');
+            $('#popupDialog').find('h1').text('Advertencia');
+            $('#popupDialog').find('h3').text('Debe completar el campo Autor.');
+            $('#popupDialog').popup().popup('open');
+            //alert('Debe completar el campo Autor.');
         }else if(parseInt(document.getElementById("precioReferencia").value) <= 0){
-            alert('Debe completar el campo Valor.');
+            $('#popupDialog').find('h1').text('Advertencia');
+            $('#popupDialog').find('h3').text('Debe completar el campo Valor.');
+            $('#popupDialog').popup().popup('open');
+            //alert('Debe completar el campo Valor.');
         }else if(parseInt(document.getElementById("cantidad").value) <= 0){
-            alert('Debe completar el campo Cantidad.');
+            $('#popupDialog').find('h1').text('Advertencia');
+            $('#popupDialog').find('h3').text('Debe completar el campo Cantidad.');
+            $('#popupDialog').popup().popup('open');
+            //alert('Debe completar el campo Cantidad.');
         }else{
             guardar = true;
         }
@@ -394,13 +429,19 @@ var app = {
                     console.log('error al update del presupuesto');
                 }, function(tx){
                     console.log('presupuesto actualizado');
-                    alert('Libros liminados con exito');
+                    $('#popupDialog').find('h1').text('Advertencia');
+                    $('#popupDialog').find('h3').text('Libro eliminado con exito.');
+                    $('#popupDialog').popup().popup('open');
+                    //alert('Libros liminados con exito');
                     var pag = '#inicio';
                     $.mobile.changePage( pag, { transition: "slide"});
                 });                
             });
         }else{
-            alert('Debe seleccionar al menos un libro para eliminar');
+            $('#popupDialog').find('h1').text('Advertencia');
+            $('#popupDialog').find('h3').text('Debe seleccionar al menos un libro para eliminar.');
+            $('#popupDialog').popup().popup('open');
+            //alert('Debe seleccionar al menos un libro para eliminar');
         }
         
     },
@@ -417,7 +458,10 @@ var app = {
         window.db.transaction(function(tx) {
             baseDatos.eliminarLibro(tx, isbn, window.usuario);
         }, baseDatos.errorUpdateLibro, function(tx){
-            alert('El libro ha sido eliminado con exito.');
+            $('#popupDialog').find('h1').text('Advertencia');
+            $('#popupDialog').find('h3').text('El libro ha sido eliminado con exito.');
+            $('#popupDialog').popup().popup('open');
+            //alert('El libro ha sido eliminado con exito.');
             window.db.transaction(function(tx) {
                 baseDatos.updatePresupuestoFinal(tx, window.usuario);
             }, function(tx){
@@ -501,11 +545,17 @@ var app = {
                 if(data.success){
                     window.usuario.evento.eventoActivo = false;
                     app.sincronizaPresupuesto();
-                    alert('Su solicitud fue enviada con exito.')
+                    $('#popupDialog').find('h1').text('Advertencia');
+                    $('#popupDialog').find('h3').text('Su solicitud fue enviada con exito.');
+                    $('#popupDialog').popup().popup('open');
+                    //alert('Su solicitud fue enviada con exito.')
                     $.mobile.changePage( '#inicio', {transition: "slide"});
                 }else{
                     $.mobile.hidePageLoadingMsg();
-                    alert(data.model.error);
+                    $('#popupDialog').find('h1').text('Advertencia');
+                    $('#popupDialog').find('h3').text(data.model.error);
+                    $('#popupDialog').popup().popup('open');
+                    //alert(data.model.error);
                     $.mobile.changePage( '#inicio', {transition: "slide"});
                 }
             }
@@ -532,7 +582,10 @@ var app = {
         window.db.transaction(function(tx) {
             baseDatos.updateLibro(tx, libro);
         }, baseDatos.errorUpdateLibro, function(tx){
-            alert('El libro ha sido modificado con exito.');
+            $('#popupDialog').find('h1').text('Advertencia');
+            $('#popupDialog').find('h3').text('El libro ha sido modificado con exito.');
+            $('#popupDialog').popup().popup('open');
+            //alert('El libro ha sido modificado con exito.');
             window.db.transaction(function(tx) {
                 baseDatos.updatePresupuestoFinal(tx, window.usuario);
             }, function(tx){
@@ -582,17 +635,26 @@ var app = {
                 success: function (data) {                
                     if(data.success){
                         //alert('Su mensaje ha sido enviado con exito.');
-                        alert(data.model.mensaje);
+                        $('#popupDialog').find('h1').text('Advertencia');
+                        $('#popupDialog').find('h3').text(data.model.mensaje);
+                        $('#popupDialog').popup().popup('open');
+                        //alert(data.model.mensaje);
                         $.mobile.changePage( '#inicio', {transition: "slide"});
                     }else{
                         $.mobile.hidePageLoadingMsg();
-                        alert(data.model.mensaje);
+                        $('#popupDialog').find('h1').text('Advertencia');
+                        $('#popupDialog').find('h3').text(data.model.mensaje);
+                        $('#popupDialog').popup().popup('open');
+                        //alert(data.model.mensaje);
                         $.mobile.changePage( '#inicio', {transition: "slide"});
                     }
                 }
             });
         }else{
-            alert('Debe llenar el campo para poder enviar.');
+            $('#popupDialog').find('h1').text('Advertencia');
+            $('#popupDialog').find('h3').text('Debe llenar el campo para poder enviar.');
+            $('#popupDialog').popup().popup('open');
+            //alert('Debe llenar el campo para poder enviar.');
         }
 
     }
